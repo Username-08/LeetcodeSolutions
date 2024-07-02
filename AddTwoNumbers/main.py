@@ -1,43 +1,42 @@
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
-        self.value = val
+        self.val = val
         self.next = next
 
+
 class Solution:
-        def addTwoNumbers(self,l1,l2):
-            temp = l1
-            temp2 = l2
-            check = temp
-            p = ""
-            q = ""
-            while temp != None:
-                p = p+str(temp.value)
-                temp = temp.next
-            while temp2 != None:
-                q = q+str(temp2.value)
-                temp2 = temp2.next
-            p = p[::-1]
-            q = q[::-1]
-                
-            sum = int(p)+int(q)
-            print(sum)
-            sum = str(sum)
-            sum = sum[::-1]
-            temp = ListNode(0)
-            check = temp
-            check2 = temp
-            count = 0
-            for i in range(len(sum)-1):
-                temp.next = ListNode(0)
-                temp = temp.next
-                count+=1
-            print(count)
-            i = 0
-            while check2 != None:
-                check2.value = sum[i]
-                check2 = check2.next
-                i+=1
-            return check
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> Optional[ListNode]:
+        p = ""
+        q = ""
+        # create p string
+        while l1 != None:
+            p = p+str(l1.val)
+            l1 = l1.next
+        # create q string
+        while l2 != None:
+            q = q+str(l2.val)
+            l2 = l2.next
+        # reverse p and q
+        p = p[::-1]
+        q = q[::-1]
+        sum = str(int(p)+int(q))[::-1]
+        head_node = ListNode(0)
+        head_node_copy = head_node
+        head_node_copy2 = head_node
+        count = 0
+        # create a linked list of length equal to the sum
+        for i in range(len(sum)-1):
+            head_node.next = ListNode(0)
+            head_node = head_node.next
+            count+=1
+        i = 0
+        # assign the sum to the linked list
+        while head_node_copy2 != None:
+            head_node_copy2.val = sum[i]
+            head_node_copy2 = head_node_copy2.next
+            i+=1
+        return head_node_copy
 
 obj = Solution()
 l1 = ListNode(9)
